@@ -5,4 +5,4 @@ class LinkedList:
     3. appendNode(value)
     4. insertNode(value, index)
     5. deleteNode(value, index)
-    6. deleteAllNodes(value, index)
+    6. deleteAllNodes(value)
