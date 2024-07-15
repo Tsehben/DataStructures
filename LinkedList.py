@@ -11,11 +11,11 @@ class LinkedList():
         self.head = None
 
     def printList(self):
-        original = self.head
-        while self.head:
-            print(self.head.value,'-->' if self.head.next is not None else '', end='')
-            self.head = self.head.next
-        self.head = original
+        current = self.head
+        while current:
+            print(current.value,'-->' if current.next is not None else '', end='')
+            current = current.next
+        
         print()
     def getLength(self):
         length = 0
@@ -30,12 +30,12 @@ class LinkedList():
         self.head = newNode
 
     def addToEnd(self, value):
-        original = self.head
+        current = self.head
         newNode = ListNode(value)
-        while self.head.next:
-            self.head = self.head.next
-        self.head.next = newNode
-        self.head = original
+        while current.next:
+            current = current.next
+        current.next = newNode
+        
 
     def addAtIndex(self, index, value):
         if index == 0:
@@ -59,8 +59,17 @@ class LinkedList():
         if index_v == index:  
             new_node = ListNode(value)
             prev.next = new_node
-           
-            
+
+
+    # Deletion
+    def deleteFirst(self):
+        current = self.head
+        dummy = ListNode(None)
+        dummy.next = current.next
+        self.head = dummy.next
+    
+    def deleteLast(self):
+        pass
 
 
 
@@ -71,8 +80,9 @@ ll1.addToBeginning(14)
 ll1.addToEnd(34)
 ll1.addToEnd(19)
 ll1.addToEnd(36)
+ll1.deleteFirst()
 
-ll1.addAtIndex(23,0)
+# ll1.addAtIndex(23,0)
 # ll1.addAtIndex(23,8)
 ll1.printList()
 print(ll1.getLength())
