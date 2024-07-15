@@ -38,6 +38,9 @@ class LinkedList():
         
 
     def addAtIndex(self, index, value):
+        if index < 0 or index >= self.getLength():
+            print("Out of Bounds")
+            return
         if index == 0:
             self.addToBeginning(value)
             return
@@ -59,6 +62,7 @@ class LinkedList():
         if index_v == index:  
             new_node = ListNode(value)
             prev.next = new_node
+        
 
 
     # Deletion
@@ -69,9 +73,40 @@ class LinkedList():
         self.head = dummy.next
     
     def deleteLast(self):
-        pass
+        prev = None
+        current = self.head
+        while current.next:
+            prev = current
+            current = current.next
+        prev.next = None
 
+    def deleteAtIndex(self, index):
+        if index < 0:
+            print("Index must be a non-negative integer")
+            return
 
+        if index == 0:
+            if self.head:
+                self.head = self.head.next
+            else:
+                print("Index out of bounds")
+            return
+
+        current = self.head
+        prev = None
+        index_v = 0
+
+        while current:
+            if index_v == index:
+                if prev:
+                    prev.next = current.next
+                return
+            prev = current
+            current = current.next
+            index_v += 1
+
+        
+        print("Index out of bounds")
 
 ll1 = LinkedList()
 ll1.addToBeginning(12)
@@ -80,10 +115,8 @@ ll1.addToBeginning(14)
 ll1.addToEnd(34)
 ll1.addToEnd(19)
 ll1.addToEnd(36)
-ll1.deleteFirst()
+# ll1.deleteAtIndex(5)
 
-# ll1.addAtIndex(23,0)
-# ll1.addAtIndex(23,8)
 ll1.printList()
 print(ll1.getLength())
 
