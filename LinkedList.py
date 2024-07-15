@@ -37,21 +37,43 @@ class LinkedList():
         self.head.next = newNode
         self.head = original
 
-    def addAtIndex(self,value, index):
-        original = self.head
-        for _ in range(index):
-            prev = self.head
-            self.head = self.head.next
-        prev.next = ListNode(value)
-        self.head.next 
+    def addAtIndex(self, index, value):
+        if index == 0:
+            self.addToBeginning(value)
+            return
 
-    
+        current = self.head
+        prev = None
+        index_v = 0
+
+        while current:
+            if index_v == index:
+                new_node = ListNode(value)
+                prev.next = new_node
+                new_node.next = current
+                return
+            prev = current
+            current = current.next
+            index_v += 1
+
+        if index_v == index:  
+            new_node = ListNode(value)
+            prev.next = new_node
+           
+            
+
+
 
 ll1 = LinkedList()
 ll1.addToBeginning(12)
 ll1.addToBeginning(13)
 ll1.addToBeginning(14)
 ll1.addToEnd(34)
+ll1.addToEnd(19)
+ll1.addToEnd(36)
+
+ll1.addAtIndex(23,0)
+# ll1.addAtIndex(23,8)
 ll1.printList()
 print(ll1.getLength())
 
