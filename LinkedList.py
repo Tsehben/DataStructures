@@ -18,10 +18,11 @@ class LinkedList():
         
         print()
     def getLength(self):
+        current = self.head
         length = 0
-        while self.head:
+        while current:
             length += 1
-            self.head = self.head.next
+            current = current.next
         return length
 
     def addToBeginning(self,value):
@@ -108,17 +109,75 @@ class LinkedList():
         
         print("Index out of bounds")
 
+        # search the linkedList  
+    def findIndex(self, index):
+        count_index = 0 
+        current = self.head
+        if index < 0 or index >= self.getLength():
+            print("index out of range")
+            return
+        while current:
+            if index == count_index:
+                print(current.value)
+                return
+            current = current.next
+            count_index += 1
+        return
+    def findValue(self, value):
+        count = 0
+        current = self.head
+        while current:
+            if current.value == value:
+                print(f"Index is {count}")
+                return
+            current = current.next
+            count += 1
+        print("Element not found ")
+        return
+    def isEmpty(self):
+        current = self.head
+        if not current:
+            print("List is Empty")
+        else:
+            print("List Not Empty")
+        return
+    def Clear(self):
+        
+       
+        self.head = None
+        return
+    def reverseList(self):
+        prev = None
+        current = self.head
+
+        while current:
+            tempNext = current.next
+            current.next = prev
+            prev = current
+            current = tempNext
+        self.head = prev
+            
+
+
 ll1 = LinkedList()
 ll1.addToBeginning(12)
 ll1.addToBeginning(13)
 ll1.addToBeginning(14)
 ll1.addToEnd(34)
 ll1.addToEnd(19)
+
 ll1.addToEnd(36)
 # ll1.deleteAtIndex(5)
 
 ll1.printList()
+ll1.findIndex(4)
+ll1.findValue(13)
+ll1.reverseList()
 print(ll1.getLength())
+
+ll1.printList()
+
+
 
    
 
