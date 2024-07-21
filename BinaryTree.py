@@ -101,6 +101,39 @@ class BinarySearchTreeNode:
 
 
         return elements
+    def delete(self, value):
+        # base case, if there is no element return None
+        if not self:
+            return None
+        
+        #if value less than root node, recurse left till we find the value if it exists
+        if value < self.data:
+            if self.left:
+                self.left = self.left.delete(value)
+        # if value is greater than current node, recurse right
+        elif value > self.data:
+            if self.right:
+                self.right = self.right.delete(value)
+
+        # at this point it  means we have found the elemene
+        else:
+            # case one with zero or one node
+            if self.left is None: 
+                return self.right
+            elif self.right is None:
+                return self.left
+            # case with two nodes(children)
+            else:
+                min_node = self.right.find_min()
+                self.data = min_node.data
+                self.right = self.right.delete(min_node.data)
+
+        return self
+
+
+
+
+
 
 def build_tree(elements):
 
@@ -122,3 +155,5 @@ print(new_tree.search(7))
 print(new_tree.find_min())
 print(new_tree.find_max())
 print(new_tree.sum_tree())
+print(new_tree.delete(80))
+print(new_tree.inorder_traversal())
