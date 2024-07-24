@@ -1,3 +1,4 @@
+from collections import deque
 class BinarySearchTreeNode:
     def __init__(self, data):
         self.data = data
@@ -130,6 +131,50 @@ class BinarySearchTreeNode:
 
         return self
 
+    def bfs(self):
+        elements = []
+        queue = deque()
+        if self:
+            queue.append(self)
+        
+        while len(queue) > 0:
+            
+            for i in range(len(queue)):
+                curr = queue.popleft()
+                elements.append(curr.data)
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+
+
+
+        return elements
+    def levelOrder(self):
+
+        res = []
+        level_nodes = [self]
+        level_values =[]
+        next_level_nodes = []
+
+        if not self:
+            return []
+
+        while level_nodes:
+            for node in level_nodes:
+                level_values.append(node.data)
+                if node.left:
+                    next_level_nodes.append(node.left)
+                if node.right:
+                    next_level_nodes.append(node.right)
+
+
+            res.append(level_values)
+            level_nodes = next_level_nodes
+
+            level_values = []
+            next_level_nodes = []
+        return res
 
 
 
@@ -157,3 +202,5 @@ print(new_tree.find_max())
 print(new_tree.sum_tree())
 print(new_tree.delete(80))
 print(new_tree.inorder_traversal())
+print(new_tree.bfs())
+print(new_tree.levelOrder())
